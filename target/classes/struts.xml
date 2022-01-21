@@ -1,0 +1,16 @@
+<!DOCTYPE struts PUBLIC
+        "-//Apache Software Foundation//DTD Struts Configuration 2.5//EN"
+        "http://struts.apache.org/dtds/struts-2.5.dtd">
+<struts>
+    <!-- 解析网页后缀 -->
+    <constant name="struts.action.extension" value="action,do,htm," />
+
+    <package name="lj" extends="struts-default" >
+        <!-- 配置通配符转发访问 -->
+        <!-- 如go_login.tml -->
+        <action name="go_*" class="com.action.ViewAction" method="view">
+            <result name="success" type="freemarker">{1}.ftl</result>
+        </action>
+
+    </package>
+</struts>

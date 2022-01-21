@@ -1,0 +1,9 @@
+<html>
+<head>
+    <script>
+        location.href='go_login.htm'
+    </script>
+</head>
+<body>
+</body>
+</html>
