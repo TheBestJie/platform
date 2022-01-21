@@ -1,5 +1,6 @@
 package com.action;
 
+import com.daomain.Page;
 import com.daomain.Sp;
 import com.google.gson.Gson;
 import com.service.SpService;
@@ -30,6 +31,11 @@ public class SpAction {
     private Sp sp;
     private Integer spbh;
 
+    private Integer page;
+    private Integer rows;
+
+
+
     public Sp getSp() {
         return sp;
     }
@@ -42,6 +48,13 @@ public class SpAction {
         this.spbh = spbh;
     }
 
+    public void setPage(Integer page) {
+        this.page = page;
+    }
+
+    public void setRows(Integer rows) {
+        this.rows = rows;
+    }
 
     /**
      * 查询商品信息表中的全部数据
@@ -50,9 +63,9 @@ public class SpAction {
      */
     @Action("spList")
     public void spList() throws IOException {
-        List<Sp> spList = spService.spList();
+       Page p = spService.spList(page,rows);
         Gson gson = new Gson();
-        String json = gson.toJson(spList);
+        String json = gson.toJson(p);
         HttpServletResponse response = ServletActionContext.getResponse();
         response.setContentType("text/json;charset=utf-8");
         response.getWriter().write(json);

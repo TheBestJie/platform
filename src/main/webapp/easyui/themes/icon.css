@@ -1,3 +1,10 @@
+.icon-import{
+	background:url('icons/file-import.png') no-repeat center center;
+}
+.icon-export{
+	background:url('icons/file-export.png') no-repeat center center;
+}
+
 .icon-blank{
 	background:url('icons/blank.gif') no-repeat center center;
 }

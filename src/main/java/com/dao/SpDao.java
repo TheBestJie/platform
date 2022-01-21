@@ -4,6 +4,7 @@ import com.daomain.Sp;
 import org.hibernate.Criteria;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+import org.hibernate.query.Query;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
@@ -19,10 +20,18 @@ public class SpDao {
      * 查询商品表
      * @return 返回所有的商品数据
      */
-    public List<Sp> findSpAll(){
+    public List<Sp> findByPage(Integer start, Integer length){
         Session session = sessionFactory.openSession();
-        Criteria criteria = session.createCriteria(Sp.class);
-        return criteria.list();
+        Query query = session.createQuery("from Sp");
+        query.setFirstResult(start);
+        query.setMaxResults(length);
+        return query.list();
+    }
+
+    public Integer total(){
+        Session session = sessionFactory.openSession();
+        Query query = session.createQuery("select count(g) from Sp g");
+        return ((Number)query.list().get(0)).intValue();
     }
 
     /**

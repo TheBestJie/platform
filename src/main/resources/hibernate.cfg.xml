@@ -12,6 +12,7 @@
         <!-- mapping映射 -->
         <mapping class="com.daomain.Yh" />
         <mapping class="com.daomain.Sp" />
+        <mapping class="com.daomain.Gys" />
 
     </session-factory>
 </hibernate-configuration>

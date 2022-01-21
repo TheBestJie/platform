@@ -1,6 +1,7 @@
 package com.service;
 
 import com.dao.SpDao;
+import com.daomain.Page;
 import com.daomain.Sp;
 import com.util.ZjmUtil;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,8 +25,12 @@ public class SpService {
      * 查询所有的商品信息
      * @return 返回查询结果
      */
-    public List<Sp> spList(){
-        return spDao.findSpAll();
+    public Page spList(Integer pagge, Integer rows){
+        Integer start = (pagge-1)*rows;
+        Integer length = rows;
+        List<Sp> spList = spDao.findByPage(start, length);
+        Integer total = spDao.total();
+        return new Page(spList,(long)total);
     }
 
     /**
