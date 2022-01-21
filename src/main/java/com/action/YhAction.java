@@ -11,10 +11,16 @@ import org.springframework.stereotype.Controller;
 
 import java.io.IOException;
 
+/**
+ * 用户相关操作的类
+ */
 @ParentPackage("lj")
 @Controller
 public class YhAction {
 
+    /**
+     * 接收参数
+     */
     private String yhm;
     private String yhmm;
 
@@ -29,6 +35,10 @@ public class YhAction {
     @Autowired
     private YhService yhService;
 
+    /**
+     * 登录验证
+     * @throws IOException
+     */
     @Action("/login")
     public void login() throws IOException {
         Yh yh = yhService.checkLogin(yhm,yhmm);

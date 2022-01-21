@@ -6,7 +6,16 @@ import net.sourceforge.pinyin4j.format.HanyuPinyinOutputFormat;
 import net.sourceforge.pinyin4j.format.HanyuPinyinToneType;
 import net.sourceforge.pinyin4j.format.exception.BadHanyuPinyinOutputFormatCombination;
 
+/**
+ * 助记码的工具类
+ */
 public class ZjmUtil {
+    /**
+     * 将所输入进来的文字的手写字母助记码
+     * 如：商品 -> sp
+     * @param chinese 输入的汉字
+     * @return 返回助记码
+     */
     public static String ToFirstChar(String chinese){
         String pinyinStr = "";
         char[] newChar = chinese.toCharArray();  //转为单个字符
@@ -29,8 +38,8 @@ public class ZjmUtil {
 
     /**
      * 汉字转为拼音
-     * @param chinese
-     * @return
+     * @param chinese 输入的汉字
+     * @return 返回的拼音
      */
     public static String ToPinyin(String chinese){
         String pinyinStr = "";

@@ -3,6 +3,9 @@ package com.daomain;
 import javax.persistence.*;
 import java.io.Serializable;
 
+/**
+ * 用户信息的实体类
+ */
 @Entity
 @Table(name = "p_yh")
 public class Yh implements Serializable {
