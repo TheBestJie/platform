@@ -5,15 +5,17 @@ import com.daomain.Page;
 import com.google.gson.Gson;
 import com.service.GysService;
 import org.apache.poi.ss.usermodel.*;
+import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.apache.struts2.ServletActionContext;
 import org.apache.struts2.convention.annotation.Action;
 import org.apache.struts2.convention.annotation.ParentPackage;
+import org.apache.struts2.convention.annotation.Result;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 
 import javax.servlet.http.HttpServletResponse;
-import java.io.File;
-import java.io.IOException;
+import java.io.*;
+import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -72,4 +74,59 @@ public class GysAction {
         }
         gysService.saves(gysList);
     }
+
+    @Action(
+            value = "gysExport",
+            results = {@Result(name = "success",type = "stream",params = {"contentDisposition","attachment;filename=gys.xlsx"})}
+    )
+    public String gysExport() throws Exception {
+        //获取数据库数据
+        List<Gys> gysList = gysService.findAll();
+        //将数据写入Excel
+        Workbook book = new XSSFWorkbook();
+        Sheet sheet = book.createSheet();
+        //写入表头数据
+        {
+            Row row = sheet.createRow(0);
+            Cell c1 = row.createCell(0);
+            Cell c2 = row.createCell(1);
+            Cell c3 = row.createCell(2);
+            Cell c4 = row.createCell(3);
+            Cell c5 = row.createCell(4);
+            c1.setCellValue("供应商编号");
+            c2.setCellValue("供应商名称");
+            c3.setCellValue("联系人");
+            c4.setCellValue("联系电话");
+            c5.setCellValue("地址");
+        }
+        //写入数据
+        int index = 1;
+        for (Gys gys : gysList) {
+            Row row = sheet.createRow(index++);
+            Cell c1 = row.createCell(0);
+            Cell c2 = row.createCell(1);
+            Cell c3 = row.createCell(2);
+            Cell c4 = row.createCell(3);
+            Cell c5 = row.createCell(4);
+            c1.setCellValue(gys.getGysbh());
+            c2.setCellValue(gys.getGysmc());
+            c3.setCellValue(gys.getLxr());
+            c4.setCellValue(gys.getLxdh());
+            c5.setCellValue(gys.getDz());
+        }
+        //下载
+        //写入本地
+        OutputStream os = new FileOutputStream("F:\\MyCode\\gys.xlsx");
+        book.write(os);
+        os.close();
+        //返回浏览器
+        fileUrl = "F:\\MyCode\\gys.xlsx";
+        return "success";
+    }
+
+    private String fileUrl;
+    public InputStream getInputStream() throws FileNotFoundException {
+        return new FileInputStream(fileUrl);
+    }
+
 }

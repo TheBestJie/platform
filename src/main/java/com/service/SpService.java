@@ -22,7 +22,7 @@ public class SpService {
     private SpDao spDao;
 
     /**
-     * 查询所有的商品信息
+     * 查询分页的商品信息
      * @return 返回查询结果
      */
     public Page spList(Integer pagge, Integer rows){
@@ -31,6 +31,14 @@ public class SpService {
         List<Sp> spList = spDao.findByPage(start, length);
         Integer total = spDao.total();
         return new Page(spList,(long)total);
+    }
+
+    /**
+     * 查询所有的商品信息
+     * @return
+     */
+    public List<Sp> findAll(){
+        return spDao.findAll();
     }
 
     /**
@@ -72,5 +80,18 @@ public class SpService {
         String zjm = ZjmUtil.ToFirstChar(sp.getSpmc());
         sp.setZjm(zjm);
         spDao.spUpdate(sp);
+    }
+
+    /**
+     * 商品的批量保存
+     * @param spList
+     */
+    @Transactional(isolation = Isolation.SERIALIZABLE,propagation = Propagation.REQUIRED,rollbackFor = Exception.class)
+    public void saves(List<Sp> spList){
+        for (Sp sp : spList) {
+            String zjm = ZjmUtil.ToFirstChar(sp.getSpmc());
+            sp.setZjm(zjm);
+            spDao.spSave(sp);
+        }
     }
 }

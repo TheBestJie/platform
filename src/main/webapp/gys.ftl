@@ -29,6 +29,10 @@
                     }
                 });
             }
+            
+            function toExport() {
+                location.href = 'gysExport.do';
+            }
         </script>
     </head>
     <body>
@@ -49,7 +53,7 @@
             <a class="easyui-linkbutton" data-options="iconCls:'icon-edit',plain:true">编辑</a>
             <a class="easyui-linkbutton" data-options="iconCls:'icon-remove',plain:true">删除</a>
             <a class="easyui-linkbutton" data-options="iconCls:'icon-import',plain:true,onClick:toSelectFile">批量导入</a>
-            <a class="easyui-linkbutton" data-options="iconCls:'icon-export',plain:true">批量导出</a>
+            <a class="easyui-linkbutton" data-options="iconCls:'icon-export',plain:true,onClick:toExport">批量导出</a>
         </div>
 
         <!-- 批量导入 -->

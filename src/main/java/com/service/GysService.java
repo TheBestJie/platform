@@ -37,4 +37,8 @@ public class GysService {
             gysDao.save(gys);
         }
     }
+
+    public List<Gys> findAll(){
+        return gysDao.findAll();
+    }
 }

@@ -97,6 +97,32 @@
                     }
                 });
             }
+
+            //批量导入
+            function toSelectFile() {
+                $("#spImportDlg").dialog("open");
+            }
+
+            //批量导入操作
+            function toImport() {
+                $('#spImportForm').form('submit',{
+                    url:'spImport.do',
+                    success:function(){
+                        $.messager.show({
+                            title:'提示',
+                            msg:'导入成功'
+                        });
+                        $('#spImportDlg').dialog('close');
+                        $('#spImportForm').form('clear');
+                        $('#spgrid').datagrid('reload') ;
+                    }
+                });
+            }
+
+            //导出操作
+            function toExport() {
+                location.href = 'spExport.do';
+            }
         </script>
     </head>
     <body>
@@ -118,6 +144,8 @@
             <a class="easyui-linkbutton" data-options="plain:true,iconCls:'icon-add',onClick:toAdd">新建</a>
             <a class="easyui-linkbutton" data-options="plain:true,iconCls:'icon-remove',onClick:toDelete">删除</a>
             <a class="easyui-linkbutton" data-options="plain:true,iconCls:'icon-edit',onClick:toEdit">编辑</a>
+            <a class="easyui-linkbutton" data-options="plain:true,iconCls:'icon-import',onClick:toSelectFile">批量导入</a>
+            <a class="easyui-linkbutton" data-options="plain:true,iconCls:'icon-export',onClick:toExport">批量导出</a>
         </div>
 
         <!--新建对话框-->
@@ -168,6 +196,18 @@
         </div>
         <div id="spEditdlg-buttons">
             <a class="easyui-linkbutton" data-options="iconCls:'icon-save',plain:true,onClick:toUpdate">提交</a>
+        </div>
+
+        <!--批量导入-->
+        <div id="spImportDlg" class="easyui-dialog" data-options="title:'批量导入',width:400,modal:true,closed:true,buttons:'#spimportdlg-buttons'">
+            <form id="spImportForm" method="post" enctype="multipart/form-data">
+                <ul>
+                    <li><input class="easyui-filebox" name="excel" data-options="width:300,height:30,label:'选择文件',required:true" /></li>
+                </ul>
+            </form>
+        </div>
+        <div id="spimportdlg-buttons">
+            <a class="easyui-linkbutton" data-options="iconCls:'icon-save',plain:true,onClick:toImport">保存</a>
         </div>
     </body>
 </html>

@@ -31,6 +31,12 @@ public class GysDao {
         return query.list();
     }
 
+    public List<Gys> findAll(){
+        Session session = sessionFactory.openSession();
+        Query query = session.createQuery("from Gys");
+        return query.list();
+    }
+
     /**
      * 获取表格的总长度
      * @return

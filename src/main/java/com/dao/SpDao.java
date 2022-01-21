@@ -28,6 +28,12 @@ public class SpDao {
         return query.list();
     }
 
+    public List<Sp> findAll(){
+        Session session = sessionFactory.openSession();
+        Query query = session.createQuery("from Sp");
+        return query.list();
+    }
+
     public Integer total(){
         Session session = sessionFactory.openSession();
         Query query = session.createQuery("select count(g) from Sp g");
@@ -72,6 +78,7 @@ public class SpDao {
         Session session = sessionFactory.getCurrentSession();
         session.update(sp);
     }
+
 
 
 
