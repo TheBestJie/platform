@@ -14,7 +14,7 @@
                     <ul>
                         <li><span><a href="go_sp.htm" target="right">商品管理</a></span></li>
                         <li><span><a href="go_gys.htm" target="right">供应商管理</a></span></li>
-                        <li><span>库房管理</span></li>
+                        <li><span><a href="go_kf.htm" target="right">库房管理</a></span></li>
                     </ul>
                 </li>
                 <li>

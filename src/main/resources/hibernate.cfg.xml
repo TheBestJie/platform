@@ -13,6 +13,7 @@
         <mapping class="com.daomain.Yh" />
         <mapping class="com.daomain.Sp" />
         <mapping class="com.daomain.Gys" />
+        <mapping class="com.daomain.Kf" />
 
     </session-factory>
 </hibernate-configuration>

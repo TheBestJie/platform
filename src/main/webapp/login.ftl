@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <title>Title</title>
+    <title>登录</title>
     <meta charset="UTF-8">
     <link rel="stylesheet" type="text/css" href="easyui/themes/default/easyui.css"/>
     <link rel="stylesheet" type="text/css" href="easyui/themes/icon.css"/>
