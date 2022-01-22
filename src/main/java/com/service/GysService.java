@@ -3,6 +3,7 @@ package com.service;
 import com.dao.GysDao;
 import com.daomain.Gys;
 import com.daomain.Page;
+import com.util.ZjmUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Isolation;
@@ -31,6 +32,10 @@ public class GysService {
         return new Page(gysList,total);
     }
 
+    /**
+     * 批量添加数据
+     * @param gysList
+     */
     @Transactional(isolation = Isolation.SERIALIZABLE,propagation = Propagation.REQUIRED,rollbackFor = Exception.class)
     public void saves(List<Gys> gysList){
         for (Gys gys : gysList) {
@@ -38,7 +43,47 @@ public class GysService {
         }
     }
 
+    /**
+     * 获取所有数据
+     * @return
+     */
     public List<Gys> findAll(){
         return gysDao.findAll();
+    }
+
+    /**
+     * 通过gysbh获取数据
+     * @param gysbh
+     * @return
+     */
+    public Gys findByGysbh(Long gysbh){
+        return gysDao.findByGysbh(gysbh);
+    }
+
+    /**
+     * 添加一条数据
+     * @param gys
+     */
+    @Transactional(isolation = Isolation.SERIALIZABLE,propagation = Propagation.REQUIRED,rollbackFor = Exception.class)
+    public void gysSave(Gys gys){
+        gysDao.save(gys);
+    }
+
+    /**
+     * 修改一条数据
+     * @param gys
+     */
+    @Transactional(isolation = Isolation.SERIALIZABLE,propagation = Propagation.REQUIRED,rollbackFor = Exception.class)
+    public void gysUpdate(Gys gys){
+        gysDao.gysUpdate(gys);
+    }
+
+    /**
+     * 删除一条数据
+     * @param gysbh
+     */
+    @Transactional(isolation = Isolation.SERIALIZABLE,propagation = Propagation.REQUIRED,rollbackFor = Exception.class)
+    public void gysDelete(Long gysbh){
+        gysDao.gysDeleteByGysbh(gysbh);
     }
 }

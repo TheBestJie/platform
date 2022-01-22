@@ -28,6 +28,15 @@ public class GysAction {
     private Integer page;
     private Integer rows;
 
+    private Gys gys;
+
+    private Long gysbh;
+
+
+    public void setExcel(File excel) {
+        this.excel = excel;
+    }
+
     public void setPage(Integer page) {
         this.page = page;
     }
@@ -36,9 +45,25 @@ public class GysAction {
         this.rows = rows;
     }
 
+    public Gys getGys() {
+        return gys;
+    }
+
+    public void setGys(Gys gys) {
+        this.gys = gys;
+    }
+
+    public void setGysbh(Long gysbh) {
+        this.gysbh = gysbh;
+    }
+
     @Autowired
     private GysService gysService;
 
+    /**
+     * 获取供应商表中的数据，通过分页查询
+     * @throws IOException
+     */
     @Action("gysList")
     public void gysList() throws IOException {
         Page p = gysService.gysList(page,rows);
@@ -49,6 +74,10 @@ public class GysAction {
         response.getWriter().write(json);
     }
 
+    /**
+     * 批量导入数据
+     * @throws IOException
+     */
     @Action("gysImport")
     public void gysImport() throws IOException {
         List<Gys> gysList = new ArrayList<>();
@@ -75,6 +104,11 @@ public class GysAction {
         gysService.saves(gysList);
     }
 
+    /**
+     * 批量导出数据
+     * @return
+     * @throws Exception
+     */
     @Action(
             value = "gysExport",
             results = {@Result(name = "success",type = "stream",params = {"contentDisposition","attachment;filename=gys.xlsx"})}
@@ -127,6 +161,43 @@ public class GysAction {
     private String fileUrl;
     public InputStream getInputStream() throws FileNotFoundException {
         return new FileInputStream(fileUrl);
+    }
+
+    /**
+     * 添加操作
+     */
+    @Action("gysSave")
+    public void gysSave(){
+        gysService.gysSave(gys);
+    }
+
+    /**
+     * 通过gysbh查询数据
+     */
+    @Action("gysEdit")
+    public void gysEdit() throws IOException {
+        Gys gys = gysService.findByGysbh(gysbh);
+        Gson gson = new Gson();
+        String json = gson.toJson(gys);
+        HttpServletResponse response = ServletActionContext.getResponse();
+        response.setContentType("text/json;charset=utf-8");
+        response.getWriter().write(json);
+    }
+
+    /**
+     * 修改操作
+     */
+    @Action("gysUpdate")
+    public void gysUpdate(){
+        gysService.gysUpdate(gys);
+    }
+
+    /**
+     * 删除操作
+     */
+    @Action("gysDelete")
+    public void gysDelete(){
+        gysService.gysDelete(gysbh);
     }
 
 }

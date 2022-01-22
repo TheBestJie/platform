@@ -31,10 +31,24 @@ public class GysDao {
         return query.list();
     }
 
+    /**
+     * 获取所有gys数据
+     * @return
+     */
     public List<Gys> findAll(){
         Session session = sessionFactory.openSession();
         Query query = session.createQuery("from Gys");
         return query.list();
+    }
+
+    /**
+     * 通过gysbh获取供应商信息
+     * @param gysbh
+     * @return
+     */
+    public Gys findByGysbh(Long gysbh){
+        Session session = sessionFactory.openSession();
+        return session.get(Gys.class,gysbh);
     }
 
     /**
@@ -47,8 +61,32 @@ public class GysDao {
         return ((Number) query.list().get(0)).longValue();
     }
 
+    /**
+     * 添加一条数据
+     * @param gys
+     */
     public void save(Gys gys){
         Session currentSession = sessionFactory.getCurrentSession();
         currentSession.save(gys);
+    }
+
+    /**
+     * 修改一条数据
+     * @param gys
+     */
+    public void gysUpdate(Gys gys){
+        Session session = sessionFactory.getCurrentSession();
+        session.update(gys);
+    }
+
+    /**
+     * 通过gysbh删除一条数据
+     * @param gysbh
+     */
+    public void gysDeleteByGysbh(Long gysbh){
+        Session session = sessionFactory.getCurrentSession();
+        Gys gys = new Gys();
+        gys.setGysbh(gysbh);
+        session.delete(gys);
     }
 }
