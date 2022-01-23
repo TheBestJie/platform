@@ -20,6 +20,7 @@
                 <li>
                     <span>经营管理</span>
                     <ul>
+                        <li><span><a href="go_jhdAdd.htm" target="right">新建进货单</a></span></li>
                         <li><span>进货管理</span></li>
                         <li><span>退货管理</span></li>
                         <li><span>销售管理</span></li>
