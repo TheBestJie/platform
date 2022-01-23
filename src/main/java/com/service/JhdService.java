@@ -78,13 +78,21 @@ public class JhdService {
             jhxqList.add(jhxq);
 
             //存储库房
-            Kc kc = new Kc();
-            kc.setKfbh(jhd.getKfbh());
-            kc.setSpbh(spbh);
-            kc.setSpsl(spsl);
-            kc.setKf(kf);
-            kc.setSp(spDao.findSpById(spbh));
-            kcDao.save(kc);
+            //通过kfbh和spbh进行查询,有数据则追加库存数，无则新增库存数
+            Kc kc = kcDao.findKcByKfAndSp(jhd.getKfbh(), spbh);
+            if(kc != null){
+                Integer _spsl = kc.getSpsl();
+                spsl += _spsl ;
+                kc.setSpsl(spsl);
+            }else {
+                kc = new Kc();
+                kc.setKfbh(jhd.getKfbh());
+                kc.setSpbh(spbh);
+                kc.setSpsl(spsl);
+                kc.setKf(kf);
+                kc.setSp(spDao.findSpById(spbh));
+            }
+            kcDao.saveOrUpdate(kc);
         }
         jhd.setJhxqList(jhxqList);
         jhdDao.saveJhd(jhd);
