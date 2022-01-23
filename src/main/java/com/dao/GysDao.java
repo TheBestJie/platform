@@ -44,7 +44,7 @@ public class GysDao {
      * @param gysbh
      * @return
      */
-    public Gys findByGysbh(Long gysbh){
+    public Gys findByGysbh(Integer gysbh){
         Session session = sessionFactory.openSession();
         return session.get(Gys.class,gysbh);
     }
@@ -81,7 +81,7 @@ public class GysDao {
      * 通过gysbh删除一条数据
      * @param gysbh
      */
-    public void gysDeleteByGysbh(Long gysbh){
+    public void gysDeleteByGysbh(Integer gysbh){
         Session session = sessionFactory.getCurrentSession();
         Gys gys = new Gys();
         gys.setGysbh(gysbh);

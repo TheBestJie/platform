@@ -56,7 +56,7 @@ public class GysService {
      * @param gysbh
      * @return
      */
-    public Gys findByGysbh(Long gysbh){
+    public Gys findByGysbh(Integer gysbh){
         return gysDao.findByGysbh(gysbh);
     }
 
@@ -83,7 +83,7 @@ public class GysService {
      * @param gysbh
      */
     @Transactional(isolation = Isolation.SERIALIZABLE,propagation = Propagation.REQUIRED,rollbackFor = Exception.class)
-    public void gysDelete(Long gysbh){
+    public void gysDelete(Integer gysbh){
         gysDao.gysDeleteByGysbh(gysbh);
     }
 }

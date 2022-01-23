@@ -11,7 +11,7 @@ import java.io.Serializable;
 public class Gys implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long gysbh;
+    private Integer gysbh;
     private String gysmc;
     private String lxr;
     private String lxdh;
@@ -22,7 +22,7 @@ public class Gys implements Serializable {
     public Gys() {
     }
 
-    public Gys(Long gysbh, String gysmc, String lxr, String lxdh, String dz, String yl1, String yl2) {
+    public Gys(Integer gysbh, String gysmc, String lxr, String lxdh, String dz, String yl1, String yl2) {
         this.gysbh = gysbh;
         this.gysmc = gysmc;
         this.lxr = lxr;
@@ -32,11 +32,11 @@ public class Gys implements Serializable {
         this.yl2 = yl2;
     }
 
-    public Long getGysbh() {
+    public Integer getGysbh() {
         return gysbh;
     }
 
-    public void setGysbh(Long gysbh) {
+    public void setGysbh(Integer gysbh) {
         this.gysbh = gysbh;
     }
 

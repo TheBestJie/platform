@@ -26,4 +26,9 @@ public class YhDao {
         query.setParameter("yhmm",yhmm);
         return (Yh) query.getSingleResult();
     }
+
+    public Yh findByYhbh(Integer yhbh){
+        Session session = sessionFactory.openSession();
+        return session.get(Yh.class,yhbh);
+    }
 }

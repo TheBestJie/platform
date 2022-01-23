@@ -30,7 +30,7 @@ public class GysAction {
 
     private Gys gys;
 
-    private Long gysbh;
+    private Integer gysbh;
 
 
     public void setExcel(File excel) {
@@ -53,7 +53,7 @@ public class GysAction {
         this.gys = gys;
     }
 
-    public void setGysbh(Long gysbh) {
+    public void setGysbh(Integer gysbh) {
         this.gysbh = gysbh;
     }
 
