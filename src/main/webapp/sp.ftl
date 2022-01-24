@@ -154,7 +154,7 @@
                 <ul>
                     <li><input id="spmc" name="sp.spmc" class="easyui-textbox" data-options="width:300,height:30,required:true,label:'商品名称',"></li>
                     <li>
-                        <select id="spdw" name="sp.spdw" class="easyui-combobox" data-options="width:300,height:30,required:true,label:'商品名称'">
+                        <select id="spdw" name="sp.spdw" class="easyui-combobox" data-options="width:300,height:30,required:true,label:'商品单位'">
                             <option value="台">台</option>
                             <option value="个">个</option>
                             <option value="盏">盏</option>
@@ -180,7 +180,7 @@
                 <ul>
                     <li><input id="spmc2" name="sp.spmc" class="easyui-textbox" data-options="width:300,height:30,required:true,label:'商品名称',"></li>
                     <li>
-                        <select id="spdw2" name="sp.spdw" class="easyui-combobox" data-options="width:300,height:30,required:true,label:'商品名称'">
+                        <select id="spdw2" name="sp.spdw" class="easyui-combobox" data-options="width:300,height:30,required:true,label:'商品单位'">
                             <option value="台">台</option>
                             <option value="个">个</option>
                             <option value="盏">盏</option>

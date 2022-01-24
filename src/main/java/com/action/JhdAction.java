@@ -1,6 +1,7 @@
 package com.action;
 
 import com.daomain.Jhd;
+import com.daomain.Page;
 import com.daomain.Sp;
 import com.google.gson.Gson;
 import com.service.JhdService;
@@ -10,6 +11,7 @@ import org.apache.struts2.convention.annotation.ParentPackage;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 
+import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
@@ -23,11 +25,23 @@ public class JhdAction extends CommAction{
     @Autowired
     private JhdService jhdService;
 
+    //分页参数
+    private Integer page;
+    private Integer rows;
+
     private String spmc;
     private Jhd jhd;
     private String spbhs;
     private String spsls;
     private String spjgs;
+
+    public void setPage(Integer page) {
+        this.page = page;
+    }
+
+    public void setRows(Integer rows) {
+        this.rows = rows;
+    }
 
     public void setSpmc(String spmc) {
         this.spmc = spmc;
@@ -70,9 +84,18 @@ public class JhdAction extends CommAction{
         super.writeJson(spList);
     }
 
+    //保存进货单，进货详情，库存
     @Action("jhdSave")
-    public void jhdSave() throws IOException {
+    public void jhdSave() throws IOException, ServletException {
         jhdService.jhdSave(jhd,spbhs,spsls,spjgs);
-        super.writeString("保存成功");
+        //super.writeString("保存成功");
+        super.sendRedirect("go_jhdAdd.htm");
+    }
+
+    //进货单列表
+    @Action("jhdList")
+    public void jhdList() throws IOException {
+        Page p = jhdService.findByPage(page, rows);
+        super.writeJson(p);
     }
 }

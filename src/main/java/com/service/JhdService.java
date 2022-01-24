@@ -77,7 +77,7 @@ public class JhdService {
             jhxq.setSpsl(spsl);
             jhxqList.add(jhxq);
 
-            //存储库房
+            //存储库存
             //通过kfbh和spbh进行查询,有数据则追加库存数，无则新增库存数
             Kc kc = kcDao.findKcByKfAndSp(jhd.getKfbh(), spbh);
             if(kc != null){
@@ -96,6 +96,16 @@ public class JhdService {
         }
         jhd.setJhxqList(jhxqList);
         jhdDao.saveJhd(jhd);
+    }
+
+    //分页查询
+    public Page findByPage(Integer page, Integer rows){
+        Page p = new Page();
+        Integer start = (page-1)*rows;
+        Integer length = rows;
+        p.setRows(jhdDao.findByPage(start, length));
+        p.setTotal((long)jhdDao.findLength());
+        return p;
     }
 
 }

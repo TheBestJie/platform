@@ -29,7 +29,7 @@ public class JhdDao {
     //获取最大的订单号
     public String findMaxJhdbh(){
         Session session = sessionFactory.openSession();
-        Query query = session.createQuery("select max(jhdbh) from Jhd");
+        Query query = session.createQuery("select max(jhdbh) from Jhd order by jhsj desc ");
         return (String) query.uniqueResult();
     }
 
@@ -37,5 +37,21 @@ public class JhdDao {
     public void saveJhd(Jhd jhd){
         Session session = sessionFactory.getCurrentSession();
         session.save(jhd);
+    }
+
+    //分页查询
+    public List<Jhd> findByPage(Integer start, Integer length){
+        Session session = sessionFactory.openSession();
+        Query query = session.createQuery("from Jhd");
+        query.setFirstResult(start);
+        query.setMaxResults(length);
+        return query.list();
+    }
+
+    //查询表长度
+    public Integer findLength(){
+        Session session = sessionFactory.openSession();
+        Query query = session.createQuery("select count(j) from Jhd j");
+        return ((Number)query.uniqueResult()).intValue();
     }
 }

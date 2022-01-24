@@ -175,7 +175,12 @@
                     $.messager.alert('提示','请填写完整的进货单信息','error');
                     return ;
                 }
-                $('#jhdAddForm').submit() ;
+                $.messager.confirm('提示','是否提交?',function (f) {
+                    if(f === true){
+                        $.messager.alert('提示','提交成功','info');
+                        $('#jhdAddForm').submit() ;
+                    }
+                })
             }
         </script>
     </head>
